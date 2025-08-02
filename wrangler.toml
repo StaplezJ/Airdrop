@@ -1,4 +1,5 @@
 name = "airdropdevnet"
 main = "worker.js"  # or whatever your entry file is named
+type = "module"
 compatibility_date = "2025-08-01"
 triggers = { crons = ["5 0 * * *"] }
