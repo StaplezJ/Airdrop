@@ -1,4 +1,9 @@
-name = "solana-airdrop-worker"
-main = "worker.js"  # or whatever your entry file is named
+name = "airdropdevnet"
+main = "worker.js"
+type = "module"
 compatibility_date = "2025-08-01"
+
 triggers = { crons = ["5 0 * * *"] }
+
+[env]
+WALLET_ADDRESS = "8iYEMxwd4MzZWjfke72Pqb18jyUcrbL4qLpHNyBYiMZ2"
