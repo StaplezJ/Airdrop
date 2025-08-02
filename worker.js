@@ -1,21 +1,28 @@
-addEventListener("scheduled", event => {
-  event.waitUntil(requestAirdrop());
-});
-
-async function requestAirdrop() {
-  const wallet = WALLET_ADDRESS;
+async function requestAirdrop(wallet) {
   const params = [wallet, 1_000_000_000];
 
-  const response = await fetch("https://api.devnet.solana.com", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      jsonrpc: "2.0",
-      id: 1,
-      method: "requestAirdrop",
-      params
-    })
-  });
+  try {
+    const response = await fetch("https://api.devnet.solana.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "requestAirdrop",
+        params
+      })
+    });
 
-  console.log("Airdrop response:", await response.json());
+    const result = await response.json();
+    console.log("Airdrop response:", result);
+  } catch (err) {
+    console.error("Airdrop request failed:", err);
+  }
 }
+
+export default {
+  async scheduled(event, env, ctx) {
+    console.log("Airdrop request triggered by cron schedule.");
+    await requestAirdrop(env.WALLET_ADDRESS);
+  }
+};
