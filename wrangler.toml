@@ -1,9 +1,11 @@
 name = "airdropdevnet"
 main = "worker.js"
-type = "module"
 compatibility_date = "2025-08-01"
 
-triggers = { crons = ["5 0 * * *"] }
+triggers = { crons = ["0 * * * *"] }
 
-[env]
+[vars]
 WALLET_ADDRESS = "8iYEMxwd4MzZWjfke72Pqb18jyUcrbL4qLpHNyBYiMZ2"
+
+[observability]
+enabled = true
